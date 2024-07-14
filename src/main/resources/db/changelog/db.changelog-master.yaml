@@ -1,0 +1,5 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/v1_init_database_schema.sql
+#  - include:
+#      file: db/changelog/v2_create_base_struct.sql
