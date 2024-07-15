@@ -3,6 +3,7 @@ package com.froleod.budgetbuddy.budgetbuddy.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -11,6 +12,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Table(name = "budgets")
+@ToString
 public class Budget {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -3,6 +3,7 @@ package com.froleod.budgetbuddy.budgetbuddy.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 
@@ -10,6 +11,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @Table(name = "bank_account")
+@ToString
 public class BankAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
