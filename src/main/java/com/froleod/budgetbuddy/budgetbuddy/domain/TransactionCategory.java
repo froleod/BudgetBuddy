@@ -3,11 +3,13 @@ package com.froleod.budgetbuddy.budgetbuddy.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Getter
 @Setter
 @Table(name = "transaction_categories")
+@ToString
 public class TransactionCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
