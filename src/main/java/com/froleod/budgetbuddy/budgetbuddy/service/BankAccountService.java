@@ -1,9 +1,11 @@
 package com.froleod.budgetbuddy.budgetbuddy.service;
 
 import com.froleod.budgetbuddy.budgetbuddy.domain.BankAccount;
+import com.froleod.budgetbuddy.budgetbuddy.domain.TransactionType;
 import com.froleod.budgetbuddy.budgetbuddy.domain.User;
 import com.froleod.budgetbuddy.budgetbuddy.repository.BankAccountRepository;
 import com.froleod.budgetbuddy.budgetbuddy.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -13,6 +15,7 @@ public class BankAccountService {
 
     private final BankAccountRepository bankAccountRepository;
     private final UserRepository userRepository;
+
     public BankAccountService(BankAccountRepository bankAccountRepository, UserRepository userRepository) {
         this.bankAccountRepository = bankAccountRepository;
         this.userRepository = userRepository;
@@ -29,6 +32,17 @@ public class BankAccountService {
         existingBankAccount.setAccountNumber(updatedBankAccount.getAccountNumber());
         existingBankAccount.setBalance(updatedBankAccount.getBalance());
         return bankAccountRepository.save(existingBankAccount);
+    }
+
+
+    @Transactional
+    public void updateBalance(Long bankAccountId, BigDecimal amount, TransactionType transactionType) {
+        BankAccount bankAccount = bankAccountRepository.findById(bankAccountId).orElseThrow();
+        if (transactionType == TransactionType.INCOME) {
+            bankAccount.setBalance(BigDecimal.valueOf(Double.parseDouble(String.valueOf(bankAccount.getBalance())) + Double.parseDouble(String.valueOf(amount))));
+        } else if (transactionType == TransactionType.EXPENSE) {
+            bankAccount.setBalance(BigDecimal.valueOf(Double.parseDouble(String.valueOf(bankAccount.getBalance())) - Double.parseDouble(String.valueOf(amount))));
+        }
     }
 
     public void deleteBankAccount(Long bankAccountId) {
