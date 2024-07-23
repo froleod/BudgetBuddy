@@ -1,5 +1,6 @@
 package com.froleod.budgetbuddy.budgetbuddy.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,10 +28,12 @@ public class Transaction {
     @Column(nullable = false)
     private String description;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bank_account_id", nullable = false)
     private BankAccount bankAccount;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)
     private TransactionCategory category;
