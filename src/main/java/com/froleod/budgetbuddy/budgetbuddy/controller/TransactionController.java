@@ -1,6 +1,7 @@
 package com.froleod.budgetbuddy.budgetbuddy.controller;
 
 import com.froleod.budgetbuddy.budgetbuddy.domain.Transaction;
+import com.froleod.budgetbuddy.budgetbuddy.dto.TransactionDTO;
 import com.froleod.budgetbuddy.budgetbuddy.service.TransactionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,8 +41,8 @@ public class TransactionController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Transaction> updateTransaction(@PathVariable Long id, @RequestBody Transaction transaction) {
-        Transaction updatedTransaction = transactionService.updateTransaction(id, transaction);
+    public ResponseEntity<Transaction> updateTransaction(@PathVariable Long id, @RequestBody TransactionDTO transactionDTO) {
+        Transaction updatedTransaction = transactionService.updateTransaction(id, transactionDTO);
         return ResponseEntity.ok(updatedTransaction);
     }
 
